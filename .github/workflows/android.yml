@@ -3,17 +3,23 @@ name: Android CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    environment:
+      name: prod
     steps:
     - uses: actions/checkout@v1
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Dockerize app
+      run: |
+        echo "docker build app image"
+        echo "Push image to ACR"
+    - name: Deploy to ACK
+      run: |
+        echo "Deploy app to ACK"
